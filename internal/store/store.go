@@ -5816,10 +5816,12 @@ func truncate(s string, max int) string {
 
 func normalizeScope(scope string) string {
 	v := strings.TrimSpace(strings.ToLower(scope))
-	if v == "personal" {
-		return "personal"
+	switch v {
+	case "personal", "global":
+		return v
+	default:
+		return "project"
 	}
-	return "project"
 }
 
 // NormalizeProject applies canonical project name normalization:
